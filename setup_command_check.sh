@@ -2,7 +2,6 @@
 
 # Function definition to be added to .bashrc or .bash_profile
 COMMAND_CHECK_FUNCTION=$(cat << 'EOF'
-###########
 git_merge_check() {
     local branch_prefix=${1:0:3}
     local current_branch=$(git rev-parse --abbrev-ref HEAD)
