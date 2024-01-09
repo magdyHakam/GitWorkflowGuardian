@@ -1,20 +1,39 @@
 # Git Merge Command Checker
 
-## What is it?
-A simple yet powerful Bash script to enhance safety and accuracy in your Git workflow. This script intercepts `git merge` commands to ensure they're only executed when you're on the correct branch.
+## Description
+A Bash script that enhances safety in Git workflows by restricting `git merge` commands for specific branches to certain directories. It prevents accidental merges into `dev` or `stg` branches unless you're on a branch that starts with `dev-` or `stg-`, and you're working within specified directories.
 
 ## Why Use It?
-- **Branch Safety**: Prevents accidental merges into `dev` or `stg` branches unless you're on a branch that starts with `dev-` or `stg-`.
-- **Error Minimization**: Reduces the risk of merging into the wrong branch, which can be crucial in large projects or teams.
-- **Easy to Integrate**: Seamlessly fits into your existing Git workflow.
+- **Branch Safety**: Ensures that merges into `dev` or `stg` branches are made only from the respective `dev-` or `stg-` branches.
+- **Directory Specific**: Limits the execution of these merge commands to specified directories, adding an extra layer of safety.
+- **Error Minimization**: Reduces the risk of unintended merges, which is crucial for large projects or teams.
 
-## How to Install?
+## Prerequisites
+- Bash shell
+- Git installed
+
+## Installation
 1. Clone the repository: `git clone https://github.com/yourusername/git-merge-command-checker.git`
 2. Navigate to the cloned directory: `cd git-merge-command-checker`
 3. Run the installation script: `./setup_command_check.sh`
 
-## How Does It Work?
-The script adds a function and alias to your `.bashrc` or `.bash_profile` that checks each `git merge` command. If you try to merge `dev` or `stg` but your current branch doesn't start with the respective prefix, it stops the merge and displays a warning.
+## Configuration
+1. Create a file named `allowed_dirs.txt` in your home directory (`~/allowed_dirs.txt`).
+2. Add the absolute paths of the directories where you want the script to be active, one per line.
+   Example:
+`/path/to/your/project1
+/path/to/your/project2`
+3. The script will read this file and only activate the merge checks in these directories.
+
+## How It Works
+The script adds a function to your `.bashrc` or `.bash_profile` that:
+- Checks each `git merge` command.
+- Verifies if the command is attempting to merge `dev` or `stg`.
+- Checks if the current working directory is listed in `~/allowed_dirs.txt`.
+- If the conditions are met, and you are on the correct branch, it allows the merge. Otherwise, it displays a warning and prevents the merge.
 
 ## Contributions
-Feel free to clone, fork, or contribute to the repository. Any feedback or suggestions are highly appreciated!
+Your contributions are welcome! Feel free to fork the repository, make changes, and submit pull requests. For any suggestions or feedback, please open an issue in the repository.
+
+## License
+[MIT License](LICENSE)
